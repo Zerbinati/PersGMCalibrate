@@ -1,0 +1,368 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<style>
+
+body {
+  font-size:100%;
+}
+
+.window {
+ float:right;
+ width:4em;
+}
+
+.tab {
+ min-width:11em; 
+ float:left; 
+ margin:1em; 
+ margin-right:1.5em;
+ margin-top:0.5em;
+}
+
+.light {
+  background-color:#CCFF99
+}
+
+.super {
+  background-color: #cce6ff;
+}
+
+</style>
+
+<script>
+
+function setAttack() {
+
+  var add = 25;
+
+  document.getElementById("OwnAttack").value = 100 + add;
+  document.getElementById("OppAttack").value = 100;
+  document.getElementById("OwnMobility").value = 50 + add;
+  document.getElementById("OppMobility").value = 50;
+}
+
+function setBalanced() {
+
+  var add = 25;
+
+  document.getElementById("OwnAttack").value = 100;
+  document.getElementById("OppAttack").value = 100 + add;
+  document.getElementById("OwnMobility").value = 50;
+  document.getElementById("OppMobility").value = 50 + add;
+}
+
+function setPositional() {
+
+  var add = 25;
+
+  document.getElementById("OwnAttack").value = 100 + add;
+  document.getElementById("OppAttack").value = 100;
+  document.getElementById("OwnMobility").value = 50;
+  document.getElementById("OppMobility").value = 50 + add;
+}
+
+function setDefensive() {
+
+  var add = 25;
+
+  document.getElementById("OwnAttack").value = 100;
+  document.getElementById("OppAttack").value = 100 + add;
+  document.getElementById("OwnMobility").value = 50 + add;
+  document.getElementById("OppMobility").value = 50;
+}
+
+function setDefault() {
+  document.getElementById("MaterialMg").value = 100;
+  document.getElementById("MaterialEg").value = 100;
+  document.getElementById("ImbalanceMg").value = 100;
+  document.getElementById("ImbalanceEg").value = 100;
+  document.getElementById("PawnStructureMg").value = 100;
+  document.getElementById("PawnStructureEg").value = 100;
+  document.getElementById("MobilityMg").value = 100;
+  document.getElementById("MobilityEg").value = 100;
+  document.getElementById("PassedPawnsMg").value = 100;
+  document.getElementById("PassedPawnsEg").value = 100;
+  document.getElementById("KingSafetyMg").value = 100;
+  document.getElementById("KingSafetyEg").value = 100;
+  document.getElementById("ThreatsMg").value = 100;
+  document.getElementById("ThreatsEg").value = 100;
+  document.getElementById("SpaceMg").value = 100;
+  document.getElementById("SpaceEg").value = 100;
+  document.getElementById("PawnExchangeRate").value = 0;
+  document.getElementById("KnightExchangeRate").value = 0;
+  document.getElementById("BishopExchangeRate").value = 0
+  document.getElementById("RookExchangeRate").value = 0;
+  document.getElementById("QueenExchangeRate").value = 0;
+  document.getElementById("Attacking/DefendingWhite").value = 0;
+  document.getElementById("Attacking/DefendingBlack").value = 0;
+  document.getElementById("HangingMg").value = 23;
+  document.getElementById("HangingEg").value = 20;
+  document.getElementById("MultiAttackMg").value = 0;
+  document.getElementById("MultiAttackEg").value = 0;
+  document.getElementById("FlankAttacksMg").value = 8;
+  document.getElementById("FlankAttacksEg").value = 3;
+  document.getElementById("EloRating").value = 3000;
+  document.getElementById("CalibrateStrength").value = 0;
+  document.getElementById("CalculationSkills").value = 0;
+  document.getElementById("KnowledgeCalibration").value = 1000000000;
+  document.getElementById("Brain_Calculations").value = 0;
+  document.getElementById("DepthLines").value = 0;
+  document.getElementById("ThinkingRisky").value = 0;
+  document.getElementById("ChoicesStructure").value = 0;
+  document.getElementById("Blindness").value = 0;
+  document.getElementById("OwnAttack").value = 50;
+  document.getElementById("OppAttack").value = 50;
+  document.getElementById("OwnMobility").value = 50;
+  document.getElementById("OppMobility").value = 50;
+  document.getElementById("FlatMobility").value = 50;
+  document.getElementById("Select Style").value = "None";
+  document.getElementById("UsePersonality").value = "true";
+  document.getElementById("PersonalityDepth").value = "false";
+  document.getElementById("Defensive").value = "false";
+  document.getElementById("HighlyDefensive").value = "false";
+  document.getElementById("Strategy").value = "false";
+  document.getElementById("Aggressiveness").value = "false";
+  document.getElementById("Positional").value = "false";
+  document.getElementById("Conservative").value = "false";
+  document.getElementById("Accurate").value = "false";
+  document.getElementById("LessMovesWaited").value = "false";
+  document.getElementById("TacticalCombinations").value = "false";
+  document.getElementById("UseBook").value = "false";
+}
+
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+function inputToOption(name) {
+  var el = document.getElementById(name);
+  var val = el.value;
+  return "setoption name "+name+ " value "+ val;
+}
+
+function savePersonality() {
+  var out = '; Engines Calibrate Personality Creator\r\n';
+  out += inputToOption("MaterialMg") + '\r\n';
+  out += inputToOption("ImbalanceMg")+ '\r\n';
+  out += inputToOption("PawnStructureMg")+ '\r\n';
+  out += inputToOption("MobilityMg")+ '\r\n';
+  out += inputToOption("PassedPawnsMg")+ '\r\n';
+  out += inputToOption("KingSafetyMg") + '\r\n';
+  out += inputToOption("ThreatsMg")+ '\r\n';
+  out += inputToOption("SpaceMg")+ '\r\n';
+  out += inputToOption("HangingMg") + '\r\n';
+  out += inputToOption("MultiAttackMg") + '\r\n';
+  out += inputToOption("FlankAttacksMg") + '\r\n';
+  
+  out += inputToOption("MaterialEg") + '\r\n';
+  out += inputToOption("ImbalanceEg")+ '\r\n';
+  out += inputToOption("PawnStructureEg")+ '\r\n';
+  out += inputToOption("MobilityEg")+ '\r\n';
+  out += inputToOption("PassedPawnsEg")+ '\r\n';
+  out += inputToOption("KingSafetyEg") + '\r\n';
+  out += inputToOption("ThreatsEg")+ '\r\n';
+  out += inputToOption("SpaceEg")+ '\r\n';
+  out += inputToOption("HangingEg") + '\r\n';
+  out += inputToOption("MultiAttackEg") + '\r\n';
+  out += inputToOption("FlankAttacksEg") + '\r\n';
+ 
+  
+  out += inputToOption("PawnExchangeRate") + '\r\n';
+  out += inputToOption("KnightExchangeRate") + '\r\n';
+  out += inputToOption("BishopExchangeRate") + '\r\n';
+  out += inputToOption("RookExchangeRate") + '\r\n';
+  out += inputToOption("QueenExchangeRate") + '\r\n';
+  out += inputToOption("Attacking/DefendingWhite") + '\r\n';
+  out += inputToOption("Attacking/DefendingBlack") + '\r\n';
+  out += inputToOption("EloRating") + '\r\n';
+  out += inputToOption("CalibrateStrength") + '\r\n';
+  out += inputToOption("CalculationSkills") + '\r\n';
+  out += inputToOption("KnowledgeCalibration") + '\r\n';
+  out += inputToOption("Brain_Calculations") + '\r\n';
+  
+  out += inputToOption("DepthLines") + '\r\n';
+  out += inputToOption("ThinkingRisky") + '\r\n';
+  
+  out += inputToOption("ChoicesStructure") + '\r\n';
+  out += inputToOption("Blindness") + '\r\n';
+  
+  
+ 
+  out += inputToOption("OwnAttack") + '\r\n';
+  out += inputToOption("OppAttack") + '\r\n';
+  out += inputToOption("OwnMobility") + '\r\n';
+  out += inputToOption("OppMobility") + '\r\n';
+  out += inputToOption("FlatMobility") + '\r\n';
+  
+  out += inputToOption("Select Style") + '\r\n';
+  out += inputToOption("UsePersonality") + '\r\n';
+  out += inputToOption("PersonalityDepth") + '\r\n';
+  out += inputToOption("Defensive") + '\r\n';
+  out += inputToOption("HighlyDefensive") + '\r\n';
+  out += inputToOption("Strategy") + '\r\n';
+  out += inputToOption("Aggressiveness") + '\r\n';
+  out += inputToOption("Positional") + '\r\n';
+  out += inputToOption("Conservative") + '\r\n';
+  out += inputToOption("Accurate") + '\r\n';
+  out += inputToOption("LessMovesWaited") + '\r\n';
+  out += inputToOption("TacticalCombinations") + '\r\n';
+  
+  
+  var pst_name = document.getElementById("Select Style").value;
+  if (pst_name == "None")
+    out += "setoption name Select Style value 0\r\n"
+  if (pst_name == "None")
+    out += "setoption name Select Style value 1\r\n"
+  if (pst_name == "UltraAggressiveness")
+    out += "setoption name Select Style value 2\r\n"
+  if (pst_name == "UltraDefensive")
+    out += "setoption name Select Style value 3\r\n"
+  if (pst_name == "Positional")
+    out += "setoption name Select Style value 4\r\n"
+  if (pst_name == "Strategy")
+    out += "setoption name Select Style value 5\r\n"
+  if (pst_name == "Defensive")
+    out += "setoption name Select Style value 6\r\n"
+  if (pst_name == "Universal")
+    out += "setoption name Select Style value 7\r\n"
+
+	
+  download("personality.txt",out);
+}
+
+</script>
+
+<body>
+
+<h3>Engines Calibrate Personality Creator
+<button onclick="savePersonality()">Save personality</button>
+<button onclick="setDefault()">Reset to default</button>
+<button onclick="setAttack()">Attack</button>
+<button onclick="setBalanced()">Balanced</button>
+<button onclick="setPositional()">Positional</button>
+<button onclick="setDefensive()">Defensive</button>
+</h3>
+
+<div class="tab">
+<p><b>Midgame material</b></p>
+<p class="mono"> <span class="light" title="Midgame Material value">Material (mg)</span> <input class="window" type="number" id="MaterialMg" value="100" min="0" max="150"> </p>
+<p class="mono"> <span class="light" title="Midgame Imbalance value">Imbalance (mg)</span><input class="window" type="number" id="ImbalanceMg" value="100" min="0" max="150"> </p>
+<p class="mono"> <span class="light" title="Midgame PawnStructure value">PawnStructure (mg)</span><input class="window" type="number" id="PawnStructureMg" value="100" min="0" max="150"> </p>
+<p class="mono"> <span class="light" title="Midgame Mobility value">Mobility (mg)</span><input class="window" type="number" id="MobilityMg" value="100" min="0" max="150"> </p>
+<p class="mono"> <span class="light" title="Midgame PassedPawns value">PassedPawns (mg)</span><input class="window" type="number" id="PassedPawnsMg" value="100" min="0" max="150"> </p>
+<p class="mono"> <span class="light" title="Midgame KingSafety value">KingSafety (mg)</span><input class="window" type="number" id="KingSafetyMg" value="100" min="0" max="150"> </p>
+<p class="mono"> <span class="light" title="Midgame Threats value">Threats (mg)</span><input class="window" type="number" id="ThreatsMg" value="100" min="0" max="150"> </p>
+<p class="mono"> <span class="light" title="Midgame Space value">Space (mg)</span><input class="window" type="number" id="SpaceMg" value="100" min="0" max="150"> </p>
+<p class="mono"> <span class="light" title="Midgame Hanging value">Hanging (mg)</span><input class="window" type="number" id="HangingMg" value="23" min="0" max="150"> </p>
+</div>
+
+<div class="tab">
+<p><b>Endgame material</b></p>
+<p class="mono"> <span class="light" title="Midgame Material value">Material (eg)</span><input class="window" type="number" id="MaterialEg" value="100" min="0" max="150"> </p>
+<p class="mono"> <span class="light" title="Midgame Imbalance value">Imbalance (eg)</span><input class="window" type="number" id="ImbalanceEg" value="100" min="0" max="150"> </p>
+<p class="mono"> <span class="light" title="Midgame PawnStructure value">PawnStructure (eg)</span><input class="window" type="number" id="PawnStructureEg" value="100" min="0" max="150"> </p>
+<p class="mono"> <span class="light" title="Midgame Mobility value">Mobility (eg)</span><input class="window" type="number" id="MobilityEg" value="100" min="0" max="150"> </p>
+<p class="mono"> <span class="light" title="Midgame PassedPawns value">PassedPawns (eg)</span><input class="window" type="number" id="PassedPawnsEg" value="100" min="0" max="150"> </p>
+<p class="mono"> <span class="light" title="Midgame KingSafety value">KingSafety (eg)</span><input class="window" type="number" id="KingSafetyEg" value="100" min="0" max="150"> </p>
+<p class="mono"> <span class="light" title="Midgame Threats value">Threats (eg)</span><input class="window" type="number" id="ThreatsEg" value="100" min="0" max="150"> </p>
+<p class="mono"> <span class="light" title="Midgame Space value">Space (eg)</span><input class="window" type="number" id="SpaceEg" value="100" min="0" max="150"> </p>
+<p class="mono"> <span class="light" title="Midgame Hanging value">Hanging (eg)</span><input class="window" type="number" id="HangingEg" value="20" min="0" max="150"> </p>
+</div>
+
+<div class="tab">
+<p><b>Settings Calibration</b></p>
+<p class="mono"> <span class="light" title="Weight of attacking and defending pieces, expressed as percentage">Elo Rating</span><input class="window" type="number" id="EloRating" value="3000" min="0" max="3000"> </p>
+<p class="mono"> <span class="light" title="Weight of attacking and defending pieces, expressed as percentage">Calibrate Strength</span><input class="window" type="number" id="CalibrateStrength" value="0" min="0" max="100"> </p>
+<p class="mono"> <span class="light" title="Weight of attacking and defending pieces, expressed as percentage">Calculation Skills</span><input class="window" type="number" id="CalculationSkills" value="0" min="0" max="60"> </p>
+<p class="mono"> <span class="light" title="Weight of attacking and defending pieces, expressed as percentage">Knowledge Calibration</span><input class="window" type="number" id="KnowledgeCalibration" value="1000000000" min="0" max="1000000000"> </p>
+<p class="mono"> <span class="light" title="Weight of attacking and defending pieces, expressed as percentage">Brain Calculations</span><input class="window" type="number" id="Brain_Calculations" value="0" min="1" max="200"> </p>
+<p class="mono"> <span class="light" title="Weight of attacking and defending pieces, expressed as percentage">Depth Lines</span><input class="window" type="number" id="DepthLines" value="0" min="0" max="32"> </p>
+<p class="mono"> <span class="light" title="Weight of attacking and defending pieces, expressed as percentage">Thinking Risky</span><input class="window" type="number" id="ThinkingRisky" value="0" min="0" max="512"> </p>
+<p class="mono"> <span class="light" title="Weight of attacking and defending pieces, expressed as percentage">Choices Structure</span><input class="window" type="number" id="ChoicesStructure" value="0" min="0" max="40"> </p>
+<p class="mono"> <span class="light" title="Weight of attacking and defending pieces, expressed as percentage">Blindness</span><input class="window" type="number" id="Blindness" value="0" min="0" max="2"> </p>
+</div>
+
+<div class="tab">
+<p><b>Influence Strategies </b></p>
+<p class="mono"> <span class="super" title="Program's threats against enemy king, expressed as percentage">Own attack</span><input class="window" type="number" id="OwnAttack" value="50" min="0" max="500"> </p>
+<p class="mono"> <span class="super" title="Opponent's threats against program's king, expressed as percentage">Opp attack</span><input class="window" type="number" id="OppAttack" value="50" min="0" max="500"> </p>
+<p class="mono"> <span class="super" title="Own mobility, expressed as percentage; after increasing it above opponent's mobility, the engine will pursue active play">Own mobility</span><input class="window" type="number" id="OwnMobility" value="50" min="0" max="500"> </p>
+<p class="mono"> <span class="super" title="Opponent's mobility, expressed as percentage; after increasing it above own mobility, the engine will try to restrict its opponent">Opp mobility</span><input class="window" type="number" id="OppMobility" value="50" min="0" max="500"> </p>
+<p class="mono"> <span class="super" title="Symmetric component of mobility evaluation">Flat mobility</span><input class="window" type="number" id="FlatMobility" value="50" min="0" max="500"> </p>
+</div>
+
+
+<div class="tab">
+<p><b>Strength of Play</b></p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">Attacking/Defending White</span><input class="window" type="number" id="Attacking/DefendingWhite" value="0" min="0" max="500"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">Attacking/Defending Black</span><input class="window" type="number" id="Attacking/DefendingBlack" value="0" min="0" max="500"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">MultiAttack (mg)</span><input class="window" type="number" id="MultiAttackMg" value="0" min="0" max="500"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">MultiAttack (eg)</span><input class="window" type="number" id="MultiAttackEg" value="0" min="0" max="500"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">FlankAttacks (mg)</span><input class="window" type="number" id="FlankAttacksMg" value="8" min="0" max="500"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">FlankAttacks (eg)</span><input class="window" type="number" id="FlankAttacksEg" value="3" min="0" max="500"> </p>
+</div>
+
+<div class="tab">
+<p><b>Configure Features</b></p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">UsePersonality</span><input class="window" type="check" id="UsePersonality" value="true"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">PersonalityDepth</span><input class="window" type="check" id="PersonalityDepth" value="false"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">Defensive</span><input class="window" type="check" id="Defensive" value="false"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">HighlyDefensive</span><input class="window" type="check" id="HighlyDefensive" value="false"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">Strategy</span><input class="window" type="check" id="Strategy" value="false"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">Aggressiveness</span><input class="window" type="check" id="Aggressiveness" value="false"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">Positional</span><input class="window" type="check" id="Positional" value="false"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">Conservative</span><input class="window" type="check" id="Conservative" value="false"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">Accurate</span><input class="window" type="check" id="Accurate" value="false"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">LessMovesWaited</span><input class="window" type="check" id="LessMovesWaited" value="false"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">TacticalCombinations</span><input class="window" type="check" id="TacticalCombinations" value="false"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">UseBook</span><input class="window" type="check" id="UseBook" value="false"> </p>
+</div>
+
+<div class="tab">
+<p><b>Piece positioning</b></p>
+<p class="mono"> Select Style
+
+<select id="Select Style" style="float:right";>
+  <option value="None">None</option>
+  <option value="None" selected="selected">None</option>
+  <option value="Aggressiveness">Aggressiveness</option>
+  <option value="Ultra-Aggressiveness">Ultra-Aggressiveness</option>
+  <option value="Ultra-Defensive">Ultra-Defensive</option>
+  <option value="Positional">Positional</option>
+  <option value="Strategy">Strategy</option>
+  <option value="Defence">Defence</option>
+  <option value="Universal">Universal</option>
+</select>
+</p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">Pawn Exchange Rate</span><input class="window" type="number" id="PawnExchangeRate" value="0" min="0" max="500"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">Knight Exchange Rate</span><input class="window" type="number" id="KnightExchangeRate" value="0" min="0" max="500"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">Bishop Exchange Rate</span><input class="window" type="number" id="BishopExchangeRate" value="0" min="0" max="500"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">Rook Exchange Rate</span><input class="window" type="number" id="RookExchangeRate" value="0" min="0" max="500"> </p>
+<p class="mono"> <span class="super" title="Influence of material advantage on evaluation, expressed as a percentage. Default is 100. Values around 90 lead to frequent pawn sacrifices, smaller values results in weaker, riskier and more fun game.">Queen Exchange Rate</span><input class="window" type="number" id="QueenExchangeRate" value="0" min="0" max="500"> </p>
+</div>
+
+
+
+<br>
+
+</div>
+
+
+<p id="demo"></p>
+
+</body>
+</html>

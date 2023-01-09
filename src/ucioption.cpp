@@ -116,6 +116,9 @@ void init(OptionsMap& o) {
   o["Select Style"]                      << Option( "None var Aggressiveness var Ultra-Aggressiveness var Ultra-Defensive var Positional var Strategy var Defence var Universal var None", "None" );
   o["Use_Personality"]                   << Option(true, on_UCI_LimitStrength);
   o["Personality Depth"]                 << Option(false);
+  o["Random Root Game Plies"]            << Option(16, 0, 32);
+  o["Random Multipv of Play"]            << Option(5, 1, 16);
+  o["Random Average Score"]              << Option(20, 0, 100);
   o["Elo_Rating"]                        << Option(3000, 1350, 3000);//handicap mode from ShashChess 
   o["Calibrate_Strength"]                << Option(0, 0, 100, on_eval_perturb);
   o["Brain_Calculations"]                << Option(0, 0, 200);

@@ -617,8 +617,8 @@ void Thread::search() {
   }
 
   size_t multiPV = size_t(Options["MultiPV"]);
-  if (rootPos.game_ply() < 16)
-      multiPV = 5;
+  if (rootPos.game_ply() < int(Options["Random Root Game Plies"]))
+      multiPV = int(Options["Random Multipv of Play"]);
 
   //from true handicap mode begin 
   //Skill skill(skillLevel, limitStrength ? uciElo : 0);
@@ -920,7 +920,7 @@ Qex = (us == WHITE ?  make_score(qehh, qehh / 2)
 
   int maxPV=0;
   for (unsigned int i=1; i<rootMoves.size(); ++i)
-       if (rootMoves[i].score + PawnValueEg * 2 / 10 > rootMoves[0].score)
+       if (rootMoves[i].score + PawnValueEg * int(Options["Random Average Score"]) / 100 > rootMoves[0].score)
            maxPV=i;
   static PRNG rng(now());
   int iPV;

@@ -105,13 +105,14 @@ void init(OptionsMap& o) {
   o["Experience Book Eval Importance"]   << Option(5, 0, 10);
   o["Experience Book Min Depth"]         << Option(27, EXP_MIN_DEPTH, 64);
   o["Experience Book Max Moves"]         << Option(20, 1, 100);
-
-  o["OwnBook"]                           << Option(false);
-  o["Book File"]                         << Option("<empty>", on_book1_file);
-  o["BestBookMove"]                      << Option(true);
-  o["BookDepth"]                         << Option(100, 1, 350);
-  
-  
+  o["PersBook1"]                         << Option(false);
+  o["PersBook1 File"]                    << Option("<empty>", on_book1_file);
+  o["PersBook1 BestMove"]                << Option(true);
+  o["PersBook1 Depth"]                   << Option(100, 1, 350);
+  o["PersBook2"]                         << Option(false);
+  o["PersBook2 File"]                    << Option("<empty>", on_book2_file);
+  o["PersBook2 BestMove"]                << Option(true);
+  o["PersBook2 Depth"]                   << Option(100, 1, 350);
   o["Select Style"]                      << Option( "None var Aggressiveness var Ultra-Aggressiveness var Ultra-Defensive var Positional var Strategy var Defence var Universal var None", "None" );
   o["Use_Personality"]                   << Option(true, on_UCI_LimitStrength);
   o["Personality Depth"]                 << Option(false);
@@ -157,7 +158,6 @@ void init(OptionsMap& o) {
   o["Queen Exchange Rate"]               << Option(0, -1000, 1000);
   o["Attacking/Defending White"]         << Option(  0, -300 , 300 );
   o["Attacking/Defending Black"]         << Option(  0, -300 , 300 );
-  // SPSA
   o["Hanging(mg)"]                       << Option(23, -50, 100, on_eval);
   o["Hanging(eg)"]                       << Option(20, -50, 100, on_eval);
   o["MultiAttack(mg)"]                   << Option(0, -50, 150, on_eval);
@@ -169,7 +169,6 @@ void init(OptionsMap& o) {
   o["Own mobility"]                      << Option(50, -50, 150, on_own_mobility);
   o["Opp mobility"]                      << Option(50, -50, 150, on_opp_mobility);
   o["Flat mobility"]                     << Option(50, -50, 150, on_flat_mobility);
-
   //Define hidden options
   o["Use Classical Evaluation"].isHidden = true;
 }

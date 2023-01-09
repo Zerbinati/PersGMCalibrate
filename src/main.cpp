@@ -65,7 +65,8 @@ int main(int argc, char* argv[]) {
   Experience::init();
   Threads.set(size_t(Options["Threads"]));
   Threads.setFull(Options["Thinking Risky"]);
-  polybook[0].init(Options["Book File"]);
+  polybook[0].init(Options["PersBook1 File"]);
+  polybook[1].init(Options["PersBook2 File"]);
 
   Search::clear(); // After threads are up
   Eval::NNUE::init();

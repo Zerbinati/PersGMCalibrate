@@ -279,8 +279,11 @@ void MainThread::search() {
       if (!Limits.infinite && !Limits.mate)
       {
           //Check polyglot books first
-          if ((bool)Options["OwnBook"] && rootPos.game_ply() / 2 < (int)Options["BookDepth"])
-              bookMove = polybook[0].probe(rootPos, (bool)Options["BestBookMove"]);
+          if ((bool)Options["PersBook1"] && rootPos.game_ply() / 2 < (int)Options["PersBook1 Depth"])
+              bookMove = polybook[0].probe(rootPos, (bool)Options["PersBook1 BestMove"]);
+
+          if(bookMove == MOVE_NONE && (bool)Options["PersBook2"] && rootPos.game_ply() / 2 < (int)Options["PersBook2 Depth"])
+              bookMove = polybook[1].probe(rootPos, (bool)Options["PersBook1 BesMove"]);
 
           //Check experience book second
           if (bookMove == MOVE_NONE && (bool)Options["Experience Book"] && rootPos.game_ply() / 2 < (int)Options["Experience Book Max Moves"] && Experience::enabled())
@@ -614,7 +617,9 @@ void Thread::search() {
   }
 
   size_t multiPV = size_t(Options["MultiPV"]);
-  
+  if (rootPos.game_ply() < 16)
+      multiPV = 5;
+
   //from true handicap mode begin 
   //Skill skill(skillLevel, limitStrength ? uciElo : 0);
    
@@ -912,6 +917,18 @@ Qex = (us == WHITE ?  make_score(qehh, qehh / 2)
       std::swap(rootMoves[0], *std::find(rootMoves.begin(), rootMoves.end(),
                 skill.best ? skill.best : skill.pick_best(multiPV)));*/
   //from true handicap mode end	
+
+  int maxPV=0;
+  for (unsigned int i=1; i<rootMoves.size(); ++i)
+       if (rootMoves[i].score + PawnValueEg * 2 / 10 > rootMoves[0].score)
+           maxPV=i;
+  static PRNG rng(now());
+  int iPV;
+  if (maxPV > 0)
+      iPV = rng.rand<unsigned>() % maxPV + 1;
+  else
+      iPV = 0;
+  std::swap(rootMoves[0], rootMoves[iPV]);
 }
 
 
